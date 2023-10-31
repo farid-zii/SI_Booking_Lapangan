@@ -20,5 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+            for($i = 9 ; $i <23 ;$i++){
+                \App\Models\Jam::create([
+                    'jam' => $i.':00',
+                    ]);
+            }
     }
 }

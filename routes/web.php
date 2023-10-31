@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LapanganController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +19,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// routes/web.php
 
 Route::resource('lapangan', LapanganController::class);
 Route::resource('jadwal', JadwalController::class);
 Route::resource('booking', BookingController::class);
+Route::resource('event', EventController::class);
+Route::resource('/', LandingController::class);
+Route::get('/informasi', [LandingController::class,'informasi']);
+

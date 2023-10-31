@@ -18,9 +18,8 @@ return new class extends Migration
             $table->String('nama');
             $table->String('noTelp');
             $table->foreignId('idLapangan');
-            $table->foreignId('idJadwal');
+            $table->date('tanggal');
             $table->String('jam');
-            $table->text('buktiBooking')->nullable();
             $table->integer('uangDp')->nullable();
             $table->integer('sisa');
             $table->String('status');

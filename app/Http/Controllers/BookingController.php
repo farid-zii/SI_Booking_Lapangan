@@ -14,6 +14,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('Admin.Booking.index',[
@@ -82,7 +83,6 @@ class BookingController extends Controller
                 'status'=>$request->status,
             ]);
         }
-
         return redirect('/booking');
 
     }
@@ -104,9 +104,13 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit($id)
     {
-        //
+        return view('Admin.Booking.edit',[
+            'booking'=>Booking::find($id)->first(),
+            'lapangan'=>Lapangan::get(),
+            'jadwal'=>Jadwal::get(),
+        ]);
     }
 
     /**
@@ -116,9 +120,43 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request, $id)
     {
-        //
+        $lapangan = Lapangan::find($request->idLapangan)->first();
+        $sisa = $lapangan - $request->uangDp;
+
+        if($request->status=="Booking"){
+            $bukti = time().'_'.$request->nama.'.jpg';
+            $request->buktiDp->move(public_path('/image/bukti_Boking'),$bukti);
+            Booking::find($id)->update([
+                'nama'=>$request->nama,
+                'noTelp'=>$request->noTelp,
+                'idLapangan'=>$request->idLapangan,
+                'idJadwal'=>$request->idJadwal,
+                'jam'=>$request->jam,
+                'uangDp'=>$request->uangDp,
+                'sisa'=>$sisa,
+                'buktiBooking'=>$bukti,
+                'status'=>$request->status,
+            ]);
+        }
+        if($request->status=="Lunas"){
+            $bukti = time().'_'.$request->nama.'.jpg';
+            $request->buktiDp->move(public_path('/image/bukti_Boking'),$bukti);
+
+            Booking::find($id)->update([
+                'nama'=>$request->nama,
+                'noTelp'=>$request->noTelp,
+                'idLapangan'=>$request->idLapangan,
+                'idJadwal'=>$request->idJadwal,
+                'jam'=>$request->jam,
+                'uangDp'=>$lapangan->harga,
+                'sisa'=>$sisa,
+                'buktiBooking'=>$bukti,
+                'status'=>$request->status,
+            ]);
+        }
+        return redirect('/booking');
     }
 
     /**

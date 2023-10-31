@@ -44,12 +44,12 @@
 								<div class="fw-bold text-black">Lapangan</div>
 							</a>
                         </li>
-						<li class="nav-item">
+						{{-- <li class="nav-item">
 							<a href="/jadwal">
                                 <i class="bi bi-box-seam"></i>
 								<div class="fw-bold text-black">Jadwal</div>
 							</a>
-                        </li>
+                        </li> --}}
 							{{-- <div class="collapse" id="dashboard">
 								<ul class="nav nav-collapse">
 									<li>
@@ -72,6 +72,12 @@
 							<a href="/booking">
                                 <i class="bi bi-cart"></i>
 								<div class="fw-bold text-black">Pemesanan</div>
+							</a>
+                        </li>
+						<li class="nav-item">
+							<a href="/event">
+                                <i class="bi bi-newspaper"></i>
+								<div class="fw-bold text-black">Berita</div>
 							</a>
                         </li>
                      </ul>
